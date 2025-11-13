@@ -1,83 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useQueryParams } from "@/hooks/use-query-params";
 import Hero from "@/components/Hero";
 import CategoryFilter from "@/components/CategoryFilter";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@shared/schema";
-import coralTshirt from '@assets/generated_images/Coral_pink_t-shirt_product_7f38a592.png';
-import turquoiseTshirt from '@assets/generated_images/Turquoise_t-shirt_product_9b85bbe8.png';
-import yellowSweatshirt from '@assets/generated_images/Yellow_sweatshirt_product_a87e990b.png';
-import mintHoodie from '@assets/generated_images/Mint_green_hoodie_product_1b619bea.png';
-import rainbowTshirt from '@assets/generated_images/White_rainbow_t-shirt_product_b9e148d6.png';
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const queryParams = useQueryParams();
+  const category = queryParams.get('category');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(category);
 
-  const mockProducts: Product[] = [
-    {
-      id: '1',
-      name: 'Dream Chaser T-Shirt',
-      category: 'tshirt',
-      price: '29.99',
-      description: 'Bold coral pink t-shirt with inspirational "make your dreams come true" print. Perfect for daily motivation.',
-      image: coralTshirt,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    },
-    {
-      id: '2',
-      name: 'Ambition Tee',
-      category: 'tshirt',
-      price: '29.99',
-      description: 'Vibrant turquoise t-shirt featuring our signature motivational message. Soft, comfortable cotton blend.',
-      image: turquoiseTshirt,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL'],
-    },
-    {
-      id: '3',
-      name: 'Dream Builder Sweatshirt',
-      category: 'sweatshirt',
-      price: '49.99',
-      description: 'Cozy warm yellow sweatshirt perfect for cool days. Features our empowering "make your dreams come true" design.',
-      image: yellowSweatshirt,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    },
-    {
-      id: '4',
-      name: 'Vision Hoodie',
-      category: 'sweatshirt',
-      price: '54.99',
-      description: 'Premium mint green hoodie with kangaroo pocket. Stay warm while chasing your goals.',
-      image: mintHoodie,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL'],
-    },
-    {
-      id: '5',
-      name: 'Rainbow Dreams Tee',
-      category: 'tshirt',
-      price: '32.99',
-      description: 'White t-shirt with colorful rainbow gradient print. Celebrate diversity and dreams in vibrant style.',
-      image: rainbowTshirt,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    },
-    {
-      id: '6',
-      name: 'Motivation Tee - Coral',
-      category: 'tshirt',
-      price: '29.99',
-      description: 'Classic coral design that never goes out of style. Lightweight and breathable for all-day wear.',
-      image: coralTshirt,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL'],
-    },
-  ];
+  useEffect(() => {
+    setSelectedCategory(category);
+  }, [category]);
 
-  const filteredProducts = selectedCategory
-    ? mockProducts.filter((p) => p.category === selectedCategory)
-    : mockProducts;
+  const { data: products, isLoading } = useQuery<Product[]>({
+    queryKey: ['/api/products', selectedCategory],
+    queryFn: async () => {
+      const url = selectedCategory 
+        ? `/api/products?category=${selectedCategory}`
+        : '/api/products';
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      return response.json();
+    },
+  });
+
+  const handleCategoryChange = (category: string | null) => {
+    setSelectedCategory(category);
+    const url = new URL(window.location.href);
+    if (category) {
+      url.searchParams.set('category', category);
+    } else {
+      url.searchParams.delete('category');
+    }
+    window.history.pushState({}, '', url);
+  };
 
   return (
     <div>
@@ -95,14 +56,28 @@ export default function Home() {
 
         <CategoryFilter
           selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
+          onCategoryChange={handleCategoryChange}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="aspect-square bg-muted animate-pulse rounded-lg" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products?.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+
+        {!isLoading && products?.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No products found in this category.</p>
+          </div>
+        )}
       </section>
     </div>
   );

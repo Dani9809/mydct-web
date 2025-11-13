@@ -1,61 +1,74 @@
 import { useState } from "react";
 import { useRoute, Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@shared/schema";
-import coralTshirt from '@assets/generated_images/Coral_pink_t-shirt_product_7f38a592.png';
-import turquoiseTshirt from '@assets/generated_images/Turquoise_t-shirt_product_9b85bbe8.png';
-import yellowSweatshirt from '@assets/generated_images/Yellow_sweatshirt_product_a87e990b.png';
-import mintHoodie from '@assets/generated_images/Mint_green_hoodie_product_1b619bea.png';
-import rainbowTshirt from '@assets/generated_images/White_rainbow_t-shirt_product_b9e148d6.png';
 
 export default function ProductDetail() {
   const [, params] = useRoute("/product/:id");
   const [selectedSize, setSelectedSize] = useState<string>("");
 
-  const mockProducts: Product[] = [
-    {
-      id: '1',
-      name: 'Dream Chaser T-Shirt',
-      category: 'tshirt',
-      price: '29.99',
-      description: 'Bold coral pink t-shirt with inspirational "make your dreams come true" print. Made from premium 100% cotton for ultimate comfort and durability. This shirt is perfect for daily motivation and expressing your ambitious spirit.',
-      image: coralTshirt,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  const { data: product, isLoading: productLoading } = useQuery<Product>({
+    queryKey: ['/api/products', params?.id],
+    queryFn: async () => {
+      const response = await fetch(`/api/products/${params?.id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch product');
+      }
+      return response.json();
     },
-    {
-      id: '2',
-      name: 'Ambition Tee',
-      category: 'tshirt',
-      price: '29.99',
-      description: 'Vibrant turquoise t-shirt featuring our signature motivational message. Soft, comfortable cotton blend.',
-      image: turquoiseTshirt,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL'],
-    },
-    {
-      id: '3',
-      name: 'Dream Builder Sweatshirt',
-      category: 'sweatshirt',
-      price: '49.99',
-      description: 'Cozy warm yellow sweatshirt perfect for cool days. Features our empowering "make your dreams come true" design.',
-      image: yellowSweatshirt,
-      printfulUrl: 'https://printful.com',
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    },
-  ];
+    enabled: !!params?.id,
+  });
 
-  const product = mockProducts.find((p) => p.id === params?.id) || mockProducts[0];
-  const relatedProducts = mockProducts.filter((p) => p.id !== product.id).slice(0, 3);
+  const { data: allProducts } = useQuery<Product[]>({
+    queryKey: ['/api/products'],
+    queryFn: async () => {
+      const response = await fetch('/api/products');
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      return response.json();
+    },
+  });
+
+  const relatedProducts = allProducts?.filter((p) => p.id !== product?.id).slice(0, 3) || [];
 
   const handleBuyNow = () => {
-    window.open(product.printfulUrl, '_blank');
-    console.log('Redirecting to Printful:', product.printfulUrl);
+    if (product) {
+      window.open(product.printfulUrl, '_blank');
+      console.log('Redirecting to Printful:', product.printfulUrl);
+    }
   };
+
+  if (productLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="aspect-square rounded-lg bg-muted animate-pulse" />
+          <div className="space-y-4">
+            <div className="h-8 bg-muted animate-pulse rounded" />
+            <div className="h-12 bg-muted animate-pulse rounded" />
+            <div className="h-24 bg-muted animate-pulse rounded" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h2 className="text-2xl font-bold mb-4">Product not found</h2>
+        <Link href="/">
+          <Button>Back to Products</Button>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
