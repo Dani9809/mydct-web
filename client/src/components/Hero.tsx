@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@assets/generated_images/Hero_lifestyle_product_photo_b7f5bc96.png";
+import heroImage from "@assets/generated_images/Gemini_Generated_Image_v3vni4v3vni4v3vn.png";
 
 export default function Hero() {
   const scrollToProducts = () => {
@@ -17,14 +17,13 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
       </div>
 
-      <div className="container relative mx-auto px-4 h-full flex items-center">
-        <div className="max-w-2xl text-white">
+      <div className="container relative mx-auto px-4 h-full flex items-center top-[10%]">
+        <div className="text-white pb-[30px]">
           <h1 className="text-5xl md:text-6xl font-bold font-[Montserrat] mb-6 leading-tight">
-            Make Your Dreams Come True
+            Wear Your Dreams 
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-white/90 font-light">
-            Wear your ambition. Inspire yourself daily with motivational apparel
-            that fuels your journey to success.
+            Motivational apparel for the everyday chaser. Shop the collection.
           </p>
           <Button
             size="lg"

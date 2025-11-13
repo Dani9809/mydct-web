@@ -23,7 +23,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
-            <h3 className="font-bold font-[Montserrat] text-lg mb-4">About Dream Apparel</h3>
+            <h3 className="font-bold font-[Montserrat] text-lg mb-4">About Make Your Dream Come True</h3>
             <p className="text-muted-foreground text-sm">
               We create motivational clothing to inspire you every day. Each piece
               is designed to remind you to chase your dreams and make them reality.
@@ -80,7 +80,7 @@ export default function Footer() {
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>
-            © {new Date().getFullYear()} Dream Apparel. Powered by{" "}
+            © {new Date().getFullYear()} Make Your Dream Come True. Powered by{" "}
             <a
               href="https://printful.com"
               target="_blank"
@@ -88,7 +88,19 @@ export default function Footer() {
               className="text-primary hover-elevate px-1 rounded"
               data-testid="link-printful"
             >
-              Printful
+              Printful.
+            </a>
+          </p>
+          <p>
+            Made with 💙 by {""}
+            <a
+              href="https://www.moniva.snap"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover-elevate px-1 rounded"
+              data-testid="link-moniva-snap"
+              >
+              Moniva Snap.
             </a>
           </p>
         </div>

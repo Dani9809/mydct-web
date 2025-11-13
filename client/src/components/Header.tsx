@@ -19,7 +19,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2" data-testid="link-home">
             <h1 className="text-xl font-bold font-[Montserrat] text-primary">
-              Dream Apparel
+              Make Your Dreams Come True
             </h1>
           </Link>
 
