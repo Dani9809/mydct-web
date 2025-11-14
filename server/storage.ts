@@ -24,24 +24,24 @@ export class MemStorage implements IStorage {
 
   private initializeProducts() {
     const products: InsertProduct[] = [
-      {
-        name: 'Dream Chaser T-Shirt',
-        category: 'tshirt',
-        price: '29.99',
-        description: 'Bold coral pink t-shirt with inspirational "make your dreams come true" print. Made from premium 100% cotton for ultimate comfort and durability. This shirt is perfect for daily motivation and expressing your ambitious spirit.',
-        image: '/generated_images/Coral_pink_t-shirt_product_7f38a592.png',
-        printfulUrl: 'https://printful.com/custom-products/mens-clothing/t-shirts',
-        sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-      },
-      {
-        name: 'Ambition Tee',
-        category: 'tshirt',
-        price: '29.99',
-        description: 'Vibrant turquoise t-shirt featuring our signature motivational message. Soft, comfortable cotton blend that keeps you inspired all day long.',
-        image: '/generated_images/Turquoise_t-shirt_product_9b85bbe8.png',
-        printfulUrl: 'https://printful.com/custom-products/mens-clothing/t-shirts',
-        sizes: ['S', 'M', 'L', 'XL'],
-      },
+      // {
+      //   name: 'Dream Chaser T-Shirt',
+      //   category: 'tshirt',
+      //   price: '29.99',
+      //   description: 'Bold coral pink t-shirt with inspirational "make your dreams come true" print. Made from premium 100% cotton for ultimate comfort and durability. This shirt is perfect for daily motivation and expressing your ambitious spirit.',
+      //   image: '/generated_images/Coral_pink_t-shirt_product_7f38a592.png',
+      //   printfulUrl: 'https://printful.com/custom-products/mens-clothing/t-shirts',
+      //   sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+      // },
+      // {
+      //   name: 'Ambition Tee',
+      //   category: 'tshirt',
+      //   price: '29.99',
+      //   description: 'Vibrant turquoise t-shirt featuring our signature motivational message. Soft, comfortable cotton blend that keeps you inspired all day long.',
+      //   image: '/generated_images/Turquoise_t-shirt_product_9b85bbe8.png',
+      //   printfulUrl: 'https://printful.com/custom-products/mens-clothing/t-shirts',
+      //   sizes: ['S', 'M', 'L', 'XL'],
+      // },
       {
         name: '"Dripping Hola!" Sweatshirt',
         category: 'sweatshirt',
@@ -92,19 +92,19 @@ export class MemStorage implements IStorage {
         category: 'sweatshirt',
         price: '49.99',
         description: 'Cozy warm yellow sweatshirt perfect for cool days. Features our empowering "make your dreams come true" design. Premium fleece interior for maximum comfort.',
-        image: '/generated_images/Yellow_sweatshirt_product_a87e990b.png',
+        image: '/generated_images/Yellow_sweatshirt_product_Gemini.png',
         printfulUrl: 'https://printful.com/custom-products/mens-clothing/sweatshirts-hoodies',
         sizes: ['S', 'M', 'L', 'XL', 'XXL'],
       },
-      {
-        name: 'Vision Hoodie',
-        category: 'sweatshirt',
-        price: '54.99',
-        description: 'Premium mint green hoodie with kangaroo pocket. Stay warm while chasing your goals. Heavy-duty construction with adjustable drawstring hood.',
-        image: '/generated_images/Mint_green_hoodie_product_1b619bea.png',
-        printfulUrl: 'https://printful.com/custom-products/mens-clothing/sweatshirts-hoodies',
-        sizes: ['S', 'M', 'L', 'XL'],
-      },
+      // {
+      //   name: 'Vision Hoodie',
+      //   category: 'sweatshirt',
+      //   price: '54.99',
+      //   description: 'Premium mint green hoodie with kangaroo pocket. Stay warm while chasing your goals. Heavy-duty construction with adjustable drawstring hood.',
+      //   image: '/generated_images/Mint_green_hoodie_product_1b619bea.png',
+      //   printfulUrl: 'https://printful.com/custom-products/mens-clothing/sweatshirts-hoodies',
+      //   sizes: ['S', 'M', 'L', 'XL'],
+      // },
       {
         name: 'Rainbow Dreams Tee',
         category: 'tshirt',
@@ -114,15 +114,15 @@ export class MemStorage implements IStorage {
         printfulUrl: 'https://printful.com/custom-products/mens-clothing/t-shirts',
         sizes: ['S', 'M', 'L', 'XL', 'XXL'],
       },
-      {
-        name: 'Motivation Tee - Coral',
-        category: 'tshirt',
-        price: '29.99',
-        description: 'Classic coral design that never goes out of style. Lightweight and breathable for all-day wear. The perfect daily reminder to chase your dreams.',
-        image: '/generated_images/Coral_pink_t-shirt_product_7f38a592.png',
-        printfulUrl: 'https://printful.com/custom-products/mens-clothing/t-shirts',
-        sizes: ['S', 'M', 'L', 'XL'],
-      },
+      // {
+      //   name: 'Motivation Tee - Coral',
+      //   category: 'tshirt',
+      //   price: '29.99',
+      //   description: 'Classic coral design that never goes out of style. Lightweight and breathable for all-day wear. The perfect daily reminder to chase your dreams.',
+      //   image: '/generated_images/Coral_pink_t-shirt_product_7f38a592.png',
+      //   printfulUrl: 'https://printful.com/custom-products/mens-clothing/t-shirts',
+      //   sizes: ['S', 'M', 'L', 'XL'],
+      // },
     ];
 
     products.forEach(product => {
