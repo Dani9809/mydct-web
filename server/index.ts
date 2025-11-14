@@ -4,7 +4,7 @@ import session from 'express-session'
 import passport from 'passport'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import routes from './routes'
+// import routes from './routes'
 // --- Setup for __dirname in ES Modules ---
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -31,7 +31,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // --- Your API Routes ---
-app.use('/api', routes)
+// app.use('/api', routes)
 
 // --- Production: Serve React App ---
 // This part is correct and unchanged
