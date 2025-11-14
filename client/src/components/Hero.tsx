@@ -9,6 +9,7 @@ export default function Hero() {
   };
 
   return (
+    
     <section className="relative h-[80vh] min-h-[600px] w-full overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
