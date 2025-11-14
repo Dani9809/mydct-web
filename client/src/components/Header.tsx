@@ -24,7 +24,7 @@ export default function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
-            {navigation.map((item) => (
+            {/* {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.path}
@@ -40,18 +40,18 @@ export default function Header() {
                   {item.name}
                 </span>
               </Link>
-            ))}
+            ))} */}
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button
+            {/* <Button
               size="icon"
               variant="ghost"
               data-testid="button-cart"
               onClick={() => console.log('Cart clicked')}
             >
               <ShoppingCart className="h-5 w-5" />
-            </Button>
+            </Button> */}
 
             <Button
               size="icon"
