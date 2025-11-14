@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
   const [location] = useLocation();
@@ -53,7 +54,8 @@ export default function Header() {
               <ShoppingCart className="h-5 w-5" />
             </Button> */}
 
-            <Button
+            <ThemeToggle />
+            {/* <Button
               size="icon"
               variant="ghost"
               className="md:hidden"
@@ -65,11 +67,11 @@ export default function Header() {
               ) : (
                 <Menu className="h-5 w-5" />
               )}
-            </Button>
+            </Button> */}
           </div>
         </div>
 
-        {mobileMenuOpen && (
+        {/* {mobileMenuOpen && (
           <nav className="md:hidden pb-4 flex flex-col gap-2">
             {navigation.map((item) => (
               <Link
@@ -90,7 +92,7 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-        )}
+        )} */}
       </div>
     </header>
   );
